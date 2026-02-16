@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="GeologgIA Digging - Excava túneles y descubre minerales preciosos">
+    <title>GeologgIA Digging - Aventura Minera</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="audio.js"></script>
+</head>
+
+<body>
+    <!-- Pantalla de inicio -->
+    <div id="startScreen" class="screen active">
+        <div class="logo-container">
+            <h1 class="game-title">
+                <span class="title-geo">Geologg</span><span class="title-ia">IA</span>
+                <span class="title-sub">Digging</span>
+            </h1>
+            <p class="tagline">Excava. Descubre. Conquista.</p>
+        </div>
+
+        <div class="mineral-showcase">
+            <div class="mineral-card">
+                <div class="mineral-icon copper">Cu</div>
+                <span>Cobre</span>
+            </div>
+            <div class="mineral-card">
+                <div class="mineral-icon gold">Au</div>
+                <span>Oro</span>
+            </div>
+            <div class="mineral-card rare">
+                <div class="mineral-icon rare-earth">RE</div>
+                <span>Tierras Raras</span>
+            </div>
+        </div>
+
+        <button id="startBtn" class="btn-primary">
+            <span>Comenzar Expedición</span>
+            <div class="btn-glow"></div>
+        </button>
+
+        <div class="instructions">
+            <h3>Cómo Jugar</h3>
+            <p>🎮 Usa los controles táctiles para moverte</p>
+            <p>⛏️ Excava túneles y evita peligros</p>
+            <p>💎 Recolecta minerales valiosos</p>
+            <p>🏆 Encuentra las codiciadas Tierras Raras</p>
+        </div>
+    </div>
+
+    <!-- Pantalla de juego -->
+    <div id="gameScreen" class="screen">
+        <!-- HUD Superior -->
+        <div class="hud">
+            <div class="hud-item">
+                <span class="hud-label">Nivel</span>
+                <span id="levelDisplay" class="hud-value">1</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">Puntos</span>
+                <span id="scoreDisplay" class="hud-value">0</span>
+            </div>
+            <div class="hud-item">
+                <span class="hud-label">Vidas</span>
+                <span id="livesDisplay" class="hud-value">❤️❤️❤️</span>
+            </div>
+        </div>
+
+        <!-- Canvas del juego -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Controles táctiles -->
+        <div class="controls">
+            <div class="dpad">
+                <button class="dpad-btn up" data-direction="up">▲</button>
+                <button class="dpad-btn left" data-direction="left">◄</button>
+                <button class="dpad-btn right" data-direction="right">►</button>
+                <button class="dpad-btn down" data-direction="down">▼</button>
+                <div class="dpad-center"></div>
+            </div>
+            <div class="action-buttons">
+                <button id="drillBtn" class="action-btn">
+                    <span>⛏️</span>
+                    <span class="btn-label">EXCAVAR</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Indicador de mineral encontrado -->
+        <div id="mineralFound" class="mineral-notification">
+            <div class="notification-content">
+                <span id="mineralIcon" class="notification-icon"></span>
+                <span id="mineralName" class="notification-text"></span>
+                <span id="mineralPoints" class="notification-points"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla de Game Over -->
+    <div id="gameOverScreen" class="screen">
+        <div class="game-over-container">
+            <h2 class="game-over-title">Expedición Finalizada</h2>
+            <div class="final-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Puntuación Final</span>
+                    <span id="finalScore" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Nivel Alcanzado</span>
+                    <span id="finalLevel" class="stat-value">1</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Minerales Recolectados</span>
+                    <div id="mineralsCollected" class="minerals-summary"></div>
+                </div>
+            </div>
+            <button id="restartBtn" class="btn-primary">
+                <span>Nueva Expedición</span>
+                <div class="btn-glow"></div>
+            </button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+
+</html>
