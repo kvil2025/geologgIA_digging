@@ -17,8 +17,8 @@ const CONFIG = {
 
     // Tipos de peligros
     DANGERS: {
-        ROCK_MONSTER: { speed: 2.5, points: 200, color: '#8b4513' },
-        LAVA_CREATURE: { speed: 3.5, points: 300, color: '#ff4500' }
+        ROCK_MONSTER: { speed: 1.5, points: 200, color: '#8b4513' },
+        LAVA_CREATURE: { speed: 2.0, points: 300, color: '#ff4500' }
     }
 };
 
