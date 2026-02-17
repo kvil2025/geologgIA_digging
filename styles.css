@@ -16,7 +16,7 @@
     --text-muted: #a0aec0;
     --success-color: #10b981;
     --danger-color: #ef4444;
-    
+
     --copper-color: #b87333;
     --gold-color: #ffd700;
     --rare-earth-color: #00ffff;
@@ -56,6 +56,7 @@ body {
         opacity: 0;
         transform: scale(0.95);
     }
+
     to {
         opacity: 1;
         transform: scale(1);
@@ -65,7 +66,7 @@ body {
 /* ===== PANTALLA DE INICIO ===== */
 #startScreen {
     background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
 }
 
 .logo-container {
@@ -79,7 +80,7 @@ body {
     font-weight: 900;
     margin-bottom: 10px;
     text-shadow: 0 0 20px rgba(0, 212, 255, 0.5),
-                 0 0 40px rgba(0, 212, 255, 0.3);
+        0 0 40px rgba(0, 212, 255, 0.3);
 }
 
 .title-geo {
@@ -174,9 +175,12 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.1);
     }
@@ -223,7 +227,9 @@ body {
     0% {
         left: -100%;
     }
-    50%, 100% {
+
+    50%,
+    100% {
         left: 100%;
     }
 }
@@ -303,45 +309,64 @@ body {
     box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
 }
 
-/* ===== CONTROLES ===== */
+/* ===== CONTROLES FLOTANTES ===== */
 .controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
     border-top: 2px solid rgba(0, 212, 255, 0.3);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+    z-index: 1000;
+    pointer-events: none;
+    /* Permite clicks a través del fondo */
+}
+
+.controls>* {
+    pointer-events: auto;
+    /* Reactiva clicks en los botones */
 }
 
 .dpad {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
+    filter: drop-shadow(0 10px 30px rgba(0, 212, 255, 0.4));
 }
 
 .dpad-btn {
     position: absolute;
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 212, 255, 0.2);
-    border: 2px solid var(--primary-color);
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 212, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border: 3px solid var(--primary-color);
     color: var(--primary-color);
-    font-size: 1.5rem;
-    border-radius: 8px;
+    font-size: 1.8rem;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     user-select: none;
+    box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3),
+        inset 0 1px 3px rgba(255, 255, 255, 0.2);
+    font-weight: 900;
 }
 
 .dpad-btn:active {
     background: var(--primary-color);
     color: var(--bg-dark);
     transform: scale(0.95);
+    box-shadow: 0 2px 10px rgba(0, 212, 255, 0.6),
+        inset 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .dpad-btn.up {
@@ -350,10 +375,18 @@ body {
     transform: translateX(-50%);
 }
 
+.dpad-btn.up:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
 .dpad-btn.down {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.dpad-btn.down:active {
+    transform: translateX(-50%) scale(0.95);
 }
 
 .dpad-btn.left {
@@ -362,10 +395,18 @@ body {
     transform: translateY(-50%);
 }
 
+.dpad-btn.left:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
 .dpad-btn.right {
     right: 0;
     top: 50%;
     transform: translateY(-50%);
+}
+
+.dpad-btn.right:active {
+    transform: translateY(-50%) scale(0.95);
 }
 
 .dpad-center {
@@ -373,11 +414,12 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
-    background: rgba(0, 212, 255, 0.1);
-    border: 2px solid rgba(0, 212, 255, 0.3);
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 212, 255, 0.15);
+    border: 2px solid rgba(0, 212, 255, 0.4);
     border-radius: 50%;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .action-buttons {
@@ -386,33 +428,38 @@ body {
 }
 
 .action-btn {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     background: linear-gradient(135deg, var(--secondary-color) 0%, #ff4500 100%);
-    border: 3px solid #ff8c00;
+    border: 4px solid #ff8c00;
     border-radius: 50%;
     color: var(--text-light);
-    font-size: 2rem;
+    font-size: 2.5rem;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 5px 20px rgba(255, 107, 53, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5),
+        inset 0 2px 5px rgba(255, 255, 255, 0.2);
     user-select: none;
+    filter: drop-shadow(0 5px 15px rgba(255, 107, 53, 0.4));
 }
 
 .action-btn:active {
     transform: scale(0.9);
-    box-shadow: 0 2px 10px rgba(255, 107, 53, 0.6);
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.7),
+        inset 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .btn-label {
-    font-size: 0.6rem;
-    font-weight: 700;
+    font-size: 0.7rem;
+    font-weight: 900;
     letter-spacing: 0.05em;
     margin-top: 5px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* ===== NOTIFICACIÓN DE MINERAL ===== */
@@ -463,7 +510,7 @@ body {
 /* ===== PANTALLA DE GAME OVER ===== */
 #gameOverScreen {
     background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
-                linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+        linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
 }
 
 .game-over-container {
@@ -539,42 +586,139 @@ body {
 }
 
 /* ===== RESPONSIVE ===== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 1024px) {
+    .dpad {
+        width: 160px;
+        height: 160px;
+    }
+
+    .dpad-btn {
+        width: 55px;
+        height: 55px;
+        font-size: 1.6rem;
+    }
+
+    .action-btn {
+        width: 90px;
+        height: 90px;
+        font-size: 2.2rem;
+    }
+}
+
+/* Móviles */
 @media (max-width: 768px) {
     .controls {
-        padding: 15px;
+        padding: 15px 10px;
     }
-    
+
+    .dpad {
+        width: 140px;
+        height: 140px;
+    }
+
+    .dpad-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        border-width: 2px;
+    }
+
+    .dpad-center {
+        width: 35px;
+        height: 35px;
+    }
+
+    .action-btn {
+        width: 80px;
+        height: 80px;
+        font-size: 2rem;
+        border-width: 3px;
+    }
+
+    .btn-label {
+        font-size: 0.65rem;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 480px) {
+    .controls {
+        padding: 10px 5px;
+    }
+
     .dpad {
         width: 120px;
         height: 120px;
     }
-    
+
     .dpad-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
-    
+
+    .dpad-center {
+        width: 30px;
+        height: 30px;
+    }
+
     .action-btn {
         width: 70px;
         height: 70px;
         font-size: 1.8rem;
     }
-}
 
-@media (max-width: 480px) {
+    .btn-label {
+        font-size: 0.6rem;
+    }
+
     .mineral-showcase {
         gap: 10px;
     }
-    
+
     .mineral-card {
         min-width: 80px;
         padding: 15px;
     }
-    
+
     .mineral-icon {
         width: 50px;
         height: 50px;
         font-size: 1.2rem;
+    }
+}
+
+/* Landscape móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    .controls {
+        padding: 8px 10px;
+    }
+
+    .dpad {
+        width: 100px;
+        height: 100px;
+    }
+
+    .dpad-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    .dpad-center {
+        width: 25px;
+        height: 25px;
+    }
+
+    .action-btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .btn-label {
+        font-size: 0.55rem;
     }
 }
